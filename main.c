@@ -279,6 +279,15 @@ int main(void)
 	                tag_triggered = 1;
 	            }
 			}
+			else
+			{
+			    // UID nieznany
+			    LCD_Clear();
+			    LCD_SetCursor(0, 0);
+			    LCD_Print("Access denied");
+			    HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET); // Dioda zgaszona
+			    HAL_Delay(2000);  // Pokaż komunikat przez 2 sekundy
+			}
 			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);  // Włącz diodę
 			HAL_Delay(4000); // Dioda świeci przez 4s
 			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET); // Wyłącz diodę
