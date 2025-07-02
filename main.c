@@ -193,8 +193,11 @@ int main(void)
 	                tag_trigger_time = HAL_GetTick();  // Zapisz czas
 	                tag_triggered = 1;
 	            }
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);  // Włącz diodę
+				HAL_Delay(4000); // Dioda świeci przez 4s
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET); // Wyłącz diodę
 			}
-			if ((str[0]==21) && (str[1]==156) && (str[2]==222) && (str[3]==0) && (str[4]==87)){
+			else if ((str[0]==21) && (str[1]==156) && (str[2]==222) && (str[3]==0) && (str[4]==87)){
 				HAL_UART_Transmit(&huart1, (uint8_t*)msg12, strlen(msg12), HAL_MAX_DELAY);
 
 				// Wyświetlanie LCD
@@ -210,8 +213,11 @@ int main(void)
 	                tag_trigger_time = HAL_GetTick();  // Zapisz czas
 	                tag_triggered = 1;
 	            }
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);  // Włącz diodę
+				HAL_Delay(4000); // Dioda świeci przez 4s
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET); // Wyłącz diodę
 			}
-			if ((str[0]==105) && (str[1]==151) && (str[2]==174) && (str[3]==2) && (str[4]==82)){
+			else if ((str[0]==105) && (str[1]==151) && (str[2]==174) && (str[3]==2) && (str[4]==82)){
 				HAL_UART_Transmit(&huart1, (uint8_t*)msg21, strlen(msg21), HAL_MAX_DELAY);
 
 				// Wyświetlanie LCD
@@ -227,8 +233,11 @@ int main(void)
 	                tag_trigger_time = HAL_GetTick();  // Zapisz czas
 	                tag_triggered = 1;
 	            }
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);  // Włącz diodę
+				HAL_Delay(4000); // Dioda świeci przez 4s
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET); // Wyłącz diodę
 			}
-			if ((str[0]==66) && (str[1]==144) && (str[2]==253) && (str[3]==0) && (str[4]==47)){
+			else if ((str[0]==66) && (str[1]==144) && (str[2]==253) && (str[3]==0) && (str[4]==47)){
 				HAL_UART_Transmit(&huart1, (uint8_t*)msg22, strlen(msg22), HAL_MAX_DELAY);
 
 				// Wyświetlanie LCD
@@ -244,8 +253,11 @@ int main(void)
 	                tag_trigger_time = HAL_GetTick();  // Zapisz czas
 	                tag_triggered = 1;
 	            }
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);  // Włącz diodę
+				HAL_Delay(4000); // Dioda świeci przez 4s
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET); // Wyłącz diodę
 			}
-			if ((str[0]==13) && (str[1]==54) && (str[2]==99) && (str[3]==147) && (str[4]==203)){
+			else if ((str[0]==13) && (str[1]==54) && (str[2]==99) && (str[3]==147) && (str[4]==203)){
 				HAL_UART_Transmit(&huart1, (uint8_t*)msg3, strlen(msg3), HAL_MAX_DELAY);
 
 				// Wyświetlanie LCD
@@ -261,8 +273,11 @@ int main(void)
 	                tag_trigger_time = HAL_GetTick();  // Zapisz czas
 	                tag_triggered = 1;
 	            }
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);  // Włącz diodę
+				HAL_Delay(4000); // Dioda świeci przez 4s
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET); // Wyłącz diodę
 			}
-			if (str[0]==8){
+			else if (str[0]==8){
 				HAL_UART_Transmit(&huart1, (uint8_t*)msg4, strlen(msg4), HAL_MAX_DELAY);
 
 				// Wyświetlanie LCD
@@ -278,6 +293,9 @@ int main(void)
 	                tag_trigger_time = HAL_GetTick();  // Zapisz czas
 	                tag_triggered = 1;
 	            }
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);  // Włącz diodę
+				HAL_Delay(4000); // Dioda świeci przez 4s
+				HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET); // Wyłącz diodę
 			}
 			else
 			{
@@ -288,9 +306,6 @@ int main(void)
 			    HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET); // Dioda zgaszona
 			    HAL_Delay(2000);  // Pokaż komunikat przez 2 sekundy
 			}
-			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);  // Włącz diodę
-			HAL_Delay(4000); // Dioda świeci przez 4s
-			HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET); // Wyłącz diodę
 		}
 	}
 	if (tag_triggered && (HAL_GetTick() - tag_trigger_time >= 4000))
