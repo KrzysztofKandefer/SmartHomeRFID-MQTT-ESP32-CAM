@@ -92,15 +92,17 @@ void loop() {
     char c = SerialSTM.read();
 
     if (c == '\n') {  
-      if (toggleFlag == 0){   // Wysyłanie UID tagu RFID
-        client.publish("kandefer/rfid/uid", incomingData.c_str());
+      if (toggleFlag == 0){   // Wysłanie nazwy przypisanej do tagu RFID
+        client.publish("kandefer/rfid/name", incomingData.c_str());
         toggleFlag = !toggleFlag;
-        client.publish("kandefer/rfid/led", String(toggleFlag).c_str());
+        if (incomingData =! "Unauthorized user\r\n"){
+          client.publish("kandefer/rfid/led", String(toggleFlag).c_str());
+        }
         Serial.print("Wysłano UID: ");
         Serial.println(incomingData);
         incomingData = "";
-      } else{   // Wysłanie nazwy przypisanej do tagu RFID
-        client.publish("kandefer/rfid/name", incomingData.c_str());
+      } else{   // Wysyłanie UID tagu RFID
+        client.publish("kandefer/rfid/uid", incomingData.c_str());
         toggleFlag = !toggleFlag;
         delay(4000);
         client.publish("kandefer/rfid/led", String(toggleFlag).c_str());
@@ -113,7 +115,7 @@ void loop() {
         Serial.print("Drzwi otwarto z aplikacji");
         delay(4000);
         client.publish("kandefer/rfid/led", "0");
-        client.publish("kandefer/camera/button", "open_confirm");
+        client.publish("kandefer/camera/button", "0");
         incomingData = "";
     } else {
       incomingData += c;
