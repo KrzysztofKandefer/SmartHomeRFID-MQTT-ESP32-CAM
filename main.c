@@ -174,11 +174,11 @@ int main(void)
 
 			// Wysałnie numeru karty na UART
 			sprintf(uart_buffer, "UID: %02X %02X %02X %02X %02X\r\n", str[0], str[1], str[2], str[3], str[4]);
-			HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
 
 
 			if ((str[0]==35) && (str[1]==39) && (str[2]==15) && (str[3]==40) && (str[4]==35)){
 				HAL_UART_Transmit(&huart1, (uint8_t*)msg11, strlen(msg11), HAL_MAX_DELAY);
+				HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
 
 				// Wyświetlanie LCD
 			    LCD_Clear();
@@ -199,6 +199,7 @@ int main(void)
 			}
 			else if ((str[0]==21) && (str[1]==156) && (str[2]==222) && (str[3]==0) && (str[4]==87)){
 				HAL_UART_Transmit(&huart1, (uint8_t*)msg12, strlen(msg12), HAL_MAX_DELAY);
+				HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
 
 				// Wyświetlanie LCD
 			    LCD_Clear();
@@ -219,6 +220,7 @@ int main(void)
 			}
 			else if ((str[0]==105) && (str[1]==151) && (str[2]==174) && (str[3]==2) && (str[4]==82)){
 				HAL_UART_Transmit(&huart1, (uint8_t*)msg21, strlen(msg21), HAL_MAX_DELAY);
+				HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
 
 				// Wyświetlanie LCD
 			    LCD_Clear();
@@ -239,6 +241,7 @@ int main(void)
 			}
 			else if ((str[0]==66) && (str[1]==144) && (str[2]==253) && (str[3]==0) && (str[4]==47)){
 				HAL_UART_Transmit(&huart1, (uint8_t*)msg22, strlen(msg22), HAL_MAX_DELAY);
+				HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
 
 				// Wyświetlanie LCD
 			    LCD_Clear();
@@ -259,6 +262,7 @@ int main(void)
 			}
 			else if ((str[0]==13) && (str[1]==54) && (str[2]==99) && (str[3]==147) && (str[4]==203)){
 				HAL_UART_Transmit(&huart1, (uint8_t*)msg3, strlen(msg3), HAL_MAX_DELAY);
+				HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
 
 				// Wyświetlanie LCD
 			    LCD_Clear();
@@ -279,6 +283,7 @@ int main(void)
 			}
 			else if (str[0]==8){
 				HAL_UART_Transmit(&huart1, (uint8_t*)msg4, strlen(msg4), HAL_MAX_DELAY);
+				HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
 
 				// Wyświetlanie LCD
 			    LCD_Clear();
@@ -299,6 +304,8 @@ int main(void)
 			}
 			else
 			{
+				HAL_UART_Transmit(&huart1, (uint8_t*)"Unauthorized user\r\n", strlen("Unauthorized user\r\n"), HAL_MAX_DELAY);
+				HAL_UART_Transmit(&huart1, (uint8_t*)uart_buffer, strlen(uart_buffer), HAL_MAX_DELAY);
 			    // UID nieznany
 			    LCD_Clear();
 			    LCD_SetCursor(0, 0);
