@@ -14,6 +14,7 @@ model = YOLO("yolov8n.pt")
 # Adres ESP32-CAM
 url = "http://192.168.239.193/capture"
 
+
 # MQTT konfiguracja
 mqtt_broker = "test.mosquitto.org"
 mqtt_port = 1883
@@ -63,7 +64,7 @@ while True:
         img_b64 = base64.b64encode(annotated_img_bytes).decode('utf-8')
 
         if found_person:
-            print("🧍 Człowiek wykryty!")
+            print("[!] Człowiek wykryty!")
             client.publish("kandefer/camera/img_human", img_b64)
             client.publish("kandefer/camera/human_detected", "1")
 
@@ -72,9 +73,9 @@ while True:
             filename = f"photos/person_{timestamp}.jpg"
             with open(filename, "wb") as f:
                 f.write(annotated_img_bytes)
-            print(f"📸 Zapisano z ramką: {filename}")
+            print(f"Zapisano z ramką: {filename}")
         else:
-            print("❌ Brak człowieka.")
+            print("Brak człowieka.")
             client.publish("kandefer/camera/human_detected", "0")
 
         # Wysłanie obrazu kontrolnego
