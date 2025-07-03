@@ -1,4 +1,4 @@
-Celem niniejszej pracy było zaprojektowanie oraz implementacja zintegrowanego systemu sterowania dostępem, przeznaczonego do zastosowania w środowisku inteligentnego domu. System ten opiera się na wykorzystaniu nowoczesnych mikrokontrolerów STM32 oraz ESP32, które odpowiadają za obsługę elementów wejściowych i komunikacyjnych, takich jak czytnik RFID, moduły WiFi oraz kamera.
+Celem niniejszej pracy było zaprojektowanie oraz implementacja zintegrowanego systemu sterowania dostępem, przeznaczonego do zastosowania w środowisku inteligentnego domu. System ten opiera się na wykorzystaniu nowoczesnych mikrokontrolerów STM32 oraz ESP32, które odpowiadają za obsługę elementów wejściowych i komunikacyjnych, takich jak czytnik RFID, moduły WiFi oraz kamera, wraz z algorytmem detkecji obecności osób opartym o model sieci neuronowej YOLO.
 
 W ramach projektu zrealizowano dwupoziomowy mechanizm autoryzacji dostępu:
 \begin{itemize}
