@@ -187,6 +187,7 @@ void reconnectMQTT() {
     // if (client.connect(clientId.c_str())) {
     if (client.connect("ESP32CAM2")) {
       Serial.println("połączono");
+      
     } else {
       Serial.print("Błąd MQTT, kod=");
       Serial.print(client.state());
@@ -195,6 +196,8 @@ void reconnectMQTT() {
   }
 }
 
+unsigned long buttonPressedTime = 0;   // czas w ms, kiedy przycisk został ostatnio wciśnięty
+const unsigned long interval = 10000;  // 10 sekund
 
 void loop() {
   if (!client.connected()) {
@@ -207,8 +210,16 @@ void loop() {
 
   // Wciśnięcie (zbocze opadające)
   if (lastButtonState == HIGH && currentButtonState == LOW) {
-    Serial.println("🔘 Przycisk wciśnięty! Wysyłam MQTT...");
-    client.publish(mqtt_topic, "open_request");  // możesz ustawić inną wiadomość
+    Serial.println("[!] Przycisk wciśnięty! Wysyłam MQTT...");
+    client.publish(mqtt_topic, "1");
+    buttonPressedTime = millis(); // zapisz czas naciśnięcia
+  }
+
+  // Sprawdź, czy minęło 10 sekund od wysłania "1"
+  if (buttonPressedTime > 0 && (millis() - buttonPressedTime >= interval)) {
+    Serial.println("10 sekund minęło, wysyłam 0");
+    client.publish(mqtt_topic, "0");
+    buttonPressedTime = 0;  // resetuj licznik
   }
 
   lastButtonState = currentButtonState;
